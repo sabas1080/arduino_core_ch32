@@ -41,6 +41,7 @@ class CH573BlePeripheral : public BLEDeviceEventListener, public BLECharacterist
 
     void setLocalName(const char *_localName);
     void setAdvertisedServiceUuid(const char* _advertisedServiceUuid);
+    void setManufacturerData(const uint8_t *data, uint8_t length);
 
     void addAttribute(BLELocalAttribute& _attribute);
     void addLocalAttribute(BLELocalAttribute& _localAttribute);
@@ -72,6 +73,8 @@ class CH573BlePeripheral : public BLEDeviceEventListener, public BLECharacterist
 
     const char*                    localName;
     const char*                    advertisedServiceUuid;
+    const uint8_t*                 _manufacturerData;
+    uint8_t                        _manufacturerDataLength;
 
     BLELocalAttribute**            localAttributes;
     unsigned char                  numLocalAttributes;

@@ -10,6 +10,8 @@ extern uint8_t attDeviceName[GAP_DEVICE_NAME_LEN];  // declared in CH573BleTmos.
 CH573BlePeripheral::CH573BlePeripheral():
     localName(NULL),
     advertisedServiceUuid(NULL),
+    _manufacturerData(NULL),
+    _manufacturerDataLength(0),
     localAttributes(NULL),
     numLocalAttributes(0),
     remoteAttributes(NULL),
@@ -91,22 +93,22 @@ void CH573BlePeripheral::begin()
             remainingAdvertisementDataLength -= uuidLength + 2;
         }
     }
-    // if (this->_manufacturerData && this->_manufacturerDataLength > 0) {
-    //     if (remainingAdvertisementDataLength >= 3) {
-    //     unsigned char dataLength = this->_manufacturerDataLength;
+    if (this->_manufacturerData && this->_manufacturerDataLength > 0) {
+        if (remainingAdvertisementDataLength >= 3) {
+            unsigned char dataLength = this->_manufacturerDataLength;
 
-    //     if (dataLength + 2 > remainingAdvertisementDataLength) {
-    //         dataLength = remainingAdvertisementDataLength - 2;
-    //     }
+            if (dataLength + 2 > remainingAdvertisementDataLength) {
+                dataLength = remainingAdvertisementDataLength - 2;
+            }
 
-    //     advertisementData[advertisementDataSize].length = dataLength;
-    //     advertisementData[advertisementDataSize].type = 0xff;
+            advertisementData[advertisementDataSize].length = dataLength;
+            advertisementData[advertisementDataSize].type = 0xff;
 
-    //     memcpy(advertisementData[advertisementDataSize].data, this->_manufacturerData, dataLength);
-    //     advertisementDataSize += 1;
-    //     remainingAdvertisementDataLength -= dataLength + 2;
-    //     }
-    // }
+            memcpy(advertisementData[advertisementDataSize].data, this->_manufacturerData, dataLength);
+            advertisementDataSize += 1;
+            remainingAdvertisementDataLength -= dataLength + 2;
+        }
+    }
 
     if (this->localName){
         unsigned char localNameLength = strlen(this->localName);
@@ -197,6 +199,11 @@ void CH573BlePeripheral::setEventHandler(BLEPeripheralEvent event, BLEPeripheral
 
 void CH573BlePeripheral::setAdvertisedServiceUuid(const char* _advertisedServiceUuid) {
   advertisedServiceUuid = _advertisedServiceUuid;
+}
+
+void CH573BlePeripheral::setManufacturerData(const uint8_t *data, uint8_t length) {
+  _manufacturerData = data;
+  _manufacturerDataLength = length;
 }
 
 void CH573BlePeripheral::addAttribute(BLELocalAttribute& _attribute) {
