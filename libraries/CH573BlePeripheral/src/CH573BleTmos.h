@@ -57,7 +57,6 @@ struct NotificationConfigEntry {
 class CH573BleTmos : public BLEDevice
 {
   friend class CH573BlePeripheral;
-  friend class CH573BleTmos;
 public:
 
 // protected:

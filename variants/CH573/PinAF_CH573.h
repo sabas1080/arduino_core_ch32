@@ -34,7 +34,7 @@ static inline void pinV32_DisconnectDebug(PinName pin)
   /** Enable this flag gives the possibility to use debug pins without any risk
     * to lose traces
     */
-  pin;
+  (void)pin;
   //ch573 seems can onlt change it in the chip config
 }
 
