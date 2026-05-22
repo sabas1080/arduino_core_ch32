@@ -51,8 +51,11 @@
 // Slave latency to use parameter update
 #define DEFAULT_DESIRED_SLAVE_LATENCY        0
 
-// Supervision timeout value (units of 10ms, 100=1s)
-#define DEFAULT_DESIRED_CONN_TIMEOUT         100
+// Supervision timeout value (units of 10ms).
+// Was 100 (1 s) — too short when BlueZ accepts the update request mid-GATT
+// discovery or when the OLED I²C transfer (~455 ms) blocks TMOS. Raised to
+// 500 (5 s) to match TGAP_CONN_EST_SUPERV_TIMEOUT in hal/ble.cpp.
+#define DEFAULT_DESIRED_CONN_TIMEOUT         500
 
 // Company Identifier: WCH
 #define WCH_COMPANY_ID                       0x07D7
