@@ -531,6 +531,7 @@ typedef struct
 
 #define ADC1 ((ADC_TypeDef *)0x40001058)
 
+#ifndef ADC_Channel_0
 #define ADC_Channel_0                               ((uint8_t)0x00)
 #define ADC_Channel_1                               ((uint8_t)0x01)
 #define ADC_Channel_2                               ((uint8_t)0x02)
@@ -539,6 +540,7 @@ typedef struct
 #define ADC_Channel_5                               ((uint8_t)0x05)
 #define ADC_Channel_6                               ((uint8_t)0x06)
 #define ADC_Channel_7                               ((uint8_t)0x07)
+#endif
 #define ADC_Channel_8                               ((uint8_t)0x08)
 #define ADC_Channel_9                               ((uint8_t)0x09)
 #define ADC_Channel_10                              ((uint8_t)0x0A)

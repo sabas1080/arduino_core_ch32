@@ -97,4 +97,8 @@ void _Error_Handler(const char *, int);
 } // extern "C"
 #endif // __cplusplus
 
+#if defined(CH571) || defined(CH572) || defined(CH573) || defined(CH581) || defined(CH582) || defined(CH583) || defined(CH585)
+#define U8X8_NO_HW_SPI
+#define U8X8_NO_HW_I2C
+#endif
 #endif //_CH32_DEF_
